@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 
 function HomePage() {
     const [activePage, setActivePage] = useState('home');
@@ -471,9 +470,9 @@ function HomePage() {
                                     <div className="p-8">
                                         <p className="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
                                         {feature.isLink ? (
-                                            <a href="#" className={`block w-full ${feature.buttonColor} text-white font-semibold py-4 px-6 rounded-xl transition duration-300 text-center btn-hover`}>
+                                            <button className={`block w-full ${feature.buttonColor} text-white font-semibold py-4 px-6 rounded-xl transition duration-300 text-center btn-hover`} onClick={() => alert('Support page would open here')}>
                                                 {feature.demoText}
-                                            </a>
+                                            </button>
                                         ) : (
                                             <button onClick={() => showPage(feature.id, true)} className={`block w-full ${feature.buttonColor} text-white font-semibold py-4 px-6 rounded-xl transition duration-300 text-center btn-hover`}>
                                                 {feature.demoText}
@@ -592,26 +591,26 @@ function HomePage() {
                                 <div>
                                     <h4 className="font-bold text-lg mb-4">Product</h4>
                                     <ul className="space-y-3 text-gray-400">
-                                        <li><a href="#" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Features</a></li>
-                                        <li><a href="#" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Pricing</a></li>
-                                        <li><a href="#" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">FAQ</a></li>
+                                        <li><button className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Features</button></li>
+                                        <li><button className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Pricing</button></li>
+                                        <li><button className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">FAQ</button></li>
                                     </ul>
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-lg mb-4">Company</h4>
                                     <ul className="space-y-3 text-gray-400">
-                                        <li><a href="#" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">About</a></li>
-                                        <li><a href="#" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Blog</a></li>
-                                        <li><a href="#" className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Careers</a></li>
+                                        <li><button className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">About</button></li>
+                                        <li><button className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Blog</button></li>
+                                        <li><button className="hover:text-white transition-colors duration-300 hover:translate-x-1 inline-block">Careers</button></li>
                                     </ul>
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-lg mb-4">Connect</h4>
                                     <div className="flex space-x-4 mb-6">
                                         {['facebook-f', 'twitter', 'instagram', 'linkedin-in'].map((social) => (
-                                            <a key={social} href="#" className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-purple-600 transition-all duration-300 hover:scale-110 hover:rotate-6">
+                                            <button key={social} className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-purple-600 transition-all duration-300 hover:scale-110 hover:rotate-6">
                                                 <i className={`fab fa-${social}`}></i>
-                                            </a>
+                                            </button>
                                         ))}
                                     </div>
                                     <p className="text-gray-400">support@endofhunger.com</p>

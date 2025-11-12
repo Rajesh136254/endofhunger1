@@ -1,21 +1,35 @@
 const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 async function setupDatabase() {
   try {
+    const {
+      DB_HOST,
+      DB_USER,
+      DB_PASSWORD,
+      DB_NAME
+    } = process.env;
+
+    if (!DB_HOST || !DB_USER || !DB_PASSWORD) {
+      console.warn('One or more DB_* environment variables are missing. Please set DB_HOST, DB_USER and DB_PASSWORD.');
+    }
+
+    const dbName = DB_NAME || 'restaurant_db';
+
     // Create connection to MySQL server (without specifying database)
     const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'Rajesh',
-      password: 'Rajesh@254'
+      host: DB_HOST ,
+      user: DB_USER,
+      password: DB_PASSWORD
     });
 
     // Try to create the database (this might fail if user doesn't have permission)
     try {
-      await connection.query('CREATE DATABASE IF NOT EXISTS restaurant_db');
-      console.log('Database created or already exists');
+      await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
+      console.log(`Database "${dbName}" created or already exists`);
     } catch (error) {
       if (error.code === 'ER_DBACCESS_DENIED_ERROR') {
-        console.log('Cannot create database (permission denied). Please create "restaurant_db" database manually and try again.');
+        console.log(`Cannot create database (permission denied). Please create "${dbName}" database manually and try again.`);
         await connection.end();
         return;
       } else {
@@ -26,12 +40,12 @@ async function setupDatabase() {
     // Close the first connection
     await connection.end();
 
-    // Create a new connection to the restaurant_db database
+    // Create a new connection to the target database
     const dbConnection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'Rajesh',
-      password: 'Rajesh@254',
-      database: 'restaurant_db'
+      host: DB_HOST || 'localhost',
+      user: DB_USER || 'Rajesh',
+      password: DB_PASSWORD || 'Rajesh@254',
+      database: dbName
     });
 
     // Create tables

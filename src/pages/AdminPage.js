@@ -52,6 +52,52 @@ function AdminPage() {
     setConfirmModal({ show: true, message, onConfirm: onYes });
   };
 
+  // ── API Calls ───────────────────────────────────
+  const loadMenu = useCallback(async () => {
+    setIsMenuLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/api/menu`);
+      const json = await res.json();
+      if (json.success) setMenuItems(json.data || []);
+    } catch (err) {
+      showToast('Failed to load menu', 'error');
+    } finally {
+      setIsMenuLoading(false);
+    }
+  }, [showToast, API_URL]);
+
+  const loadTables = useCallback(async () => {
+    setIsTablesLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/api/tables`);
+      const json = await res.json();
+      if (json.success) setTables(json.data || []);
+    } catch {
+      showToast('Failed to load tables', 'error');
+    } finally {
+      setIsTablesLoading(false);
+    }
+  }, [showToast, API_URL]);
+
+  const loadCategories = useCallback(async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/categories`);
+      const json = await res.json();
+      if (json.success && Array.isArray(json.data)) {
+        setCategories(json.data.filter(c => c && c.trim() !== ''));
+      }
+    } catch {
+      setCategories(['Appetizer', 'Main Course', 'Dessert', 'Beverage', 'Salad']);
+    }
+  }, [API_URL]);
+
+  // ── Load data ───────────────────────────────────
+  useEffect(() => {
+    loadMenu();
+    loadTables();
+    loadCategories();
+  }, [loadMenu, loadTables, loadCategories]);
+
   // ── Load QRCode lib ─────────────────────────────
   useEffect(() => {
     const script = document.createElement('script');
@@ -62,13 +108,6 @@ function AdminPage() {
       if (document.body.contains(script)) document.body.removeChild(script);
     };
   }, []);
-
-  // ── Load data ───────────────────────────────────
-  useEffect(() => {
-    loadMenu();
-    loadTables();
-    loadCategories();
-  }, [loadMenu, loadTables, loadCategories]);
 
   // ── Generate QR codes ───────────────────────────
   useEffect(() => {
@@ -83,46 +122,7 @@ function AdminPage() {
         });
       }
     });
-  }, [tables]);
-
-  // ── API Calls ───────────────────────────────────
-  const loadMenu = useCallback(async () => {
-    setIsMenuLoading(true);
-    try {
-      const res = await fetch(`${API_URL}/api/menu`);
-      const json = await res.json();
-      if (json.success) setMenuItems(json.data || []);
-    } catch (err) {
-      showToast('Failed to load menu', 'error');
-    } finally {
-      setIsMenuLoading(false);
-    }
-  }, [showToast]);
-
-  const loadTables = useCallback(async () => {
-    setIsTablesLoading(true);
-    try {
-      const res = await fetch(`${API_URL}/api/tables`);
-      const json = await res.json();
-      if (json.success) setTables(json.data || []);
-    } catch {
-      showToast('Failed to load tables', 'error');
-    } finally {
-      setIsTablesLoading(false);
-    }
-  }, [showToast]);
-
-  const loadCategories = useCallback(async () => {
-    try {
-      const res = await fetch(`${API_URL}/api/categories`);
-      const json = await res.json();
-      if (json.success && Array.isArray(json.data)) {
-        setCategories(json.data.filter(c => c && c.trim() !== ''));
-      }
-    } catch {
-      setCategories(['Appetizer', 'Main Course', 'Dessert', 'Beverage', 'Salad']);
-    }
-  }, []);
+  }, [tables, BASE_URL]); // Added BASE_URL to dependency array
 
   // ── Add New Category ────────────────────────────
   const addNewCategory = async () => {
@@ -280,6 +280,7 @@ function AdminPage() {
   };
 
   // ── Modal Controls ─────────────────────────────
+  const closeMenuModal = () => setIsMenuModalOpen(false);
   const showAddMenuModal = () => {
     setCurrentMenuItem({});
     setMenuImagePreview(null);
@@ -298,7 +299,6 @@ function AdminPage() {
     setIsMenuModalOpen(true);
   };
 
-  const closeMenuModal = () => setIsMenuModalOpen(false);
   const closeTableModal = () => setIsTableModalOpen(false);
   const showAddTableModal = () => { setCurrentTable({}); setIsTableModalOpen(true); };
   const editTable = (t) => { setCurrentTable(t); setIsTableModalOpen(true); };

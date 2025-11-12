@@ -233,10 +233,10 @@ function DashboardPage() {
                         
                         <nav className={`nav ${mobileMenuOpen ? 'open' : ''}`}>
                             <ul className="nav-list">
-                                <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection(heroRef); }}>Home</a></li>
-                                <li><a href="#features" onClick={(e) => { e.preventDefault(); scrollToSection(featuresRef); }}>Features</a></li>
-                                <li><a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToSection(pricingRef); }}>Pricing</a></li>
-                                <li><a href="#contact">Contact</a></li>
+                                <li><button onClick={() => scrollToSection(heroRef)}>Home</button></li>
+                                <li><button onClick={() => scrollToSection(featuresRef)}>Features</button></li>
+                                <li><button onClick={() => scrollToSection(pricingRef)}>Pricing</button></li>
+                                <li><button>Contact</button></li>
                             </ul>
                         </nav>
                         
@@ -619,48 +619,48 @@ function DashboardPage() {
                                 The most advanced QR-based restaurant ordering system for enhanced dining experiences.
                             </p>
                             <div className="social-links">
-                                <a href="#" className="social-link">
+                                <button className="social-link">
                                     <i className="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" className="social-link">
+                                </button>
+                                <button className="social-link">
                                     <i className="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" className="social-link">
+                                </button>
+                                <button className="social-link">
                                     <i className="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" className="social-link">
+                                </button>
+                                <button className="social-link">
                                     <i className="fab fa-linkedin-in"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                         
                         <div className="footer-section">
                             <h3 className="footer-title">Product</h3>
                             <ul className="footer-links">
-                                <li><a href="#features">Features</a></li>
-                                <li><a href="#pricing">Pricing</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Integrations</a></li>
+                                <li><button onClick={() => scrollToSection(featuresRef)}>Features</button></li>
+                                <li><button onClick={() => scrollToSection(pricingRef)}>Pricing</button></li>
+                                <li><button>FAQ</button></li>
+                                <li><button>Integrations</button></li>
                             </ul>
                         </div>
                         
                         <div className="footer-section">
                             <h3 className="footer-title">Company</h3>
                             <ul className="footer-links">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><button>About</button></li>
+                                <li><button>Blog</button></li>
+                                <li><button>Careers</button></li>
+                                <li><button>Contact</button></li>
                             </ul>
                         </div>
                         
                         <div className="footer-section">
                             <h3 className="footer-title">Support</h3>
                             <ul className="footer-links">
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Documentation</a></li>
-                                <li><a href="#">API Reference</a></li>
-                                <li><a href="#">Status</a></li>
+                                <li><button>Help Center</button></li>
+                                <li><button>Documentation</button></li>
+                                <li><button>API Reference</button></li>
+                                <li><button>Status</button></li>
                             </ul>
                         </div>
                     </div>
@@ -668,8 +668,8 @@ function DashboardPage() {
                     <div className="footer-bottom">
                         <p>&copy; 2023 EndOfHunger. All rights reserved.</p>
                         <div className="footer-legal">
-                            <a href="#">Privacy Policy</a>
-                            <a href="#">Terms of Service</a>
+                            <button>Privacy Policy</button>
+                            <button>Terms of Service</button>
                         </div>
                     </div>
                 </div>
