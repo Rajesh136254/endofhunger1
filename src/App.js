@@ -1,7 +1,7 @@
 import './App.css';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AnalyticsPage from './pages/AnalyticsPage';
 import CustomerPage from './pages/CustomerPage';
 import KitchenPage from './pages/KitchenPage';

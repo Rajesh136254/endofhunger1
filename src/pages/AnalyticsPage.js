@@ -5,10 +5,6 @@ const formatCurrency = (value) => {
   return isNaN(num) ? '0.00' : num.toFixed(2);
 };
 
-const formatNumber = (value) => {
-  const num = Number(value);
-  return isNaN(num) ? '0' : num.toLocaleString();
-};
 
 function AnalyticsPage() {
     const [currentCurrency, setCurrentCurrency] = useState('INR');
@@ -326,7 +322,7 @@ const fetchAnalyticsData = useCallback(async () => {
                 if (chart.current) chart.current.destroy();
             });
         };
-    }, []);
+    }, [fetchAnalyticsData, initializeCharts]);
 
     // Update charts when data changes
     useLayoutEffect(() => {
