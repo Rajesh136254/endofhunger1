@@ -43,10 +43,10 @@ function AdminPage() {
   const API_URL = 'http://localhost:5000';
 
   // ── Helpers ─────────────────────────────────────
-  const showToast = (msg, type = 'success') => {
+  const showToast = useCallback((msg, type = 'success') => {
     setToast({ show: true, message: msg, type });
     setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000);
-  };
+  }, []);
 
   const openConfirm = (message, onYes) => {
     setConfirmModal({ show: true, message, onConfirm: onYes });
@@ -68,7 +68,7 @@ function AdminPage() {
     loadMenu();
     loadTables();
     loadCategories();
-  }, []);
+  }, [loadMenu, loadTables, loadCategories]);
 
   // ── Generate QR codes ───────────────────────────
   useEffect(() => {
@@ -97,7 +97,7 @@ function AdminPage() {
     } finally {
       setIsMenuLoading(false);
     }
-  }, []);
+  }, [showToast]);
 
   const loadTables = useCallback(async () => {
     setIsTablesLoading(true);
@@ -110,7 +110,7 @@ function AdminPage() {
     } finally {
       setIsTablesLoading(false);
     }
-  }, []);
+  }, [showToast]);
 
   const loadCategories = useCallback(async () => {
     try {

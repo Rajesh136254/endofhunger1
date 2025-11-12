@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './DashboardPage.css';
 
 function DashboardPage() {
-    const [activeSection, setActiveSection] = useState('home');
+    
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [pricingPlan, setPricingPlan] = useState('monthly');

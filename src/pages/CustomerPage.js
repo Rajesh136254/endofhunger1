@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ function CustomerPage() {
     const [customerOrders, setCustomerOrders] = useState([]);
     // Add this line with other state variables
     const [categories, setCategories] = useState([]);
-    const { currentUser, logout } = useAuth();
+    const {  logout } = useAuth();
     const navigate = useNavigate();
     
 

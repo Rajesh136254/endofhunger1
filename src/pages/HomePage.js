@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import SignupPage from './SignupPage';
 import { useNavigate } from "react-router-dom";
 
 function HomePage() {
     const [activePage, setActivePage] = useState('home');
     const [isFullPage, setIsFullPage] = useState(false);
-    const navigate = useNavigate();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 

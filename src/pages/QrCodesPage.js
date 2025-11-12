@@ -9,7 +9,7 @@ function QrCodesPage() {
     const BASE_URL = window.location.origin;
     const API_URL = 'http://localhost:5000'; // Force use of backend server
 
-    const loadTables = async () => {
+    const loadTables = useCallback(async () => {
         try {
             const response = await fetch(`${API_URL}/api/tables`);
             const data = await response.json();
@@ -37,7 +37,7 @@ function QrCodesPage() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [API_URL, BASE_URL]);
 
     useEffect(() => {
         // Load QRCode library
@@ -52,7 +52,7 @@ function QrCodesPage() {
         return () => {
             document.body.removeChild(script);
         };
-    }, []);
+    }, [loadTables]);
 
     useEffect(() => {
         // Ensure the library is ready and we have tables
@@ -69,7 +69,7 @@ function QrCodesPage() {
                 });
             }
         });
-    }, [tables]);
+    }, [tables, BASE_URL]);
 
     const printQR = (tableId) => {
         const element = document.getElementById(`qr-${tableId}`)?.parentElement;
