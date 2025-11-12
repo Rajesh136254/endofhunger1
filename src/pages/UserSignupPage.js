@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -166,5 +166,6 @@ const UserSignupPage = ({ redirectUrl }) => {
         </div>
     );
 };
+
 
 export default UserSignupPage;
