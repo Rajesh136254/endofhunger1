@@ -1,0 +1,18 @@
+
+{
+  "projects": {
+    "default": "studio-6175876982-79c7f"
+  },
+  "targets": {
+    "studio-6175876982-79c7f": {
+      "hosting": {
+        "client": [
+          "studio-6175876982-79c7f"
+        ],
+        "server": [
+          "server-backend"
+        ]
+      }
+    }
+  }
+}
